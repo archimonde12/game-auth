@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  game-auth:
+    container_name: game-auth
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "$PORT:$PORT"
+    env_file: .env
+    restart: always
+volumes:
+  requestLog:
