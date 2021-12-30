@@ -1,7 +1,5 @@
 *.zip
 
-data*
-
 # Logs
 logs
 *.log
