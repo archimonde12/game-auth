@@ -14,9 +14,11 @@
   "dependencies": {
     "@sentry/node": "^6.13.3",
     "abi-decoder": "^2.4.0",
+    "apidoc": "^0.50.3",
     "axios": "^0.23.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.25.2",
+    "fastify-static": "^4.5.0",
     "ioredis": "^4.28.2",
     "jsonwebtoken": "^8.5.1",
     "kafkajs": "^1.15.0",
@@ -33,7 +35,8 @@
     "dev": "ts-node src/index.ts",
     "dep": "docker-compose -f docker-compose.yml up --build -d",
     "dep:log": "docker-compose -f docker-compose.yml up --build",
-    "reset": "ts-node src/scripts/reset.ts"
+    "reset": "ts-node src/scripts/reset.ts",
+    "doc": "apidoc -i src -o apidoc"
   },
   "repository": {
     "type": "git",

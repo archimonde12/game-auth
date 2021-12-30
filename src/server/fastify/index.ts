@@ -1,4 +1,5 @@
 import Fastify, { FastifyRequest, RouteShorthandOptions } from "fastify"
+import path from "path";
 import { PORT, SERVER_NAME } from "../../config"
 import { successConsoleLog } from "../../tool/color-log"
 import { logIn, logInSchema } from "./handler/log_in"
@@ -14,6 +15,10 @@ const methods = {
 fastify.post(methods.log_in, logInSchema, logIn)
 fastify.post(methods.user_info, userInfo)
 fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_sign_message)
+fastify.register(require("fastify-static"), {
+    root: path.join(__dirname, "/../../../apidoc"),
+    prefix: "/"
+})
 
 export const initFastify = async () => {
     try {

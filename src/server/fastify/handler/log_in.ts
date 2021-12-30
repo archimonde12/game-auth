@@ -24,6 +24,21 @@ const CheckValidTimestamp = (timestamp: number, valid_range_in_sec: number) => {
     return timestamp > limit_valid_timestamp
 }
 
+/**
+ * @api {post} /log_in User login
+ * @apiName UserLogin
+ * @apiGroup User
+ * @apiBody {String} sign_message User's sign message
+ * @apiBody {String} address User's address
+ * @apiBody {Number} timestamp User's timestamp
+ * @apiSuccess {String} token User's token used for next requests' authentication
+ * @apiSuccessExample {json} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "token": "John"
+ *     }
+ */
+
 export async function logIn(req: FastifyRequest, rep: FastifyReply) {
     try {
         const { sign_message, address, timestamp } = req.body as { sign_message: string, address: string, timestamp: number }

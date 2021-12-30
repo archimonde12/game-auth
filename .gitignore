@@ -110,3 +110,7 @@ dist
 test.ts
 
 *env
+
+.idea
+
+apidoc
