@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
-import { getTokenFromReq } from ".."
+import { getHTTPErrorCode, getTokenFromReq } from ".."
 import { get_cache_user_token } from "../../../cache"
 import { users } from "../../../database/mongo/mongo"
 import { ErrorHandler } from "../../../tool/error_handler"
@@ -14,8 +14,24 @@ export const UserInfoSchema: RouteShorthandOptions = {
                 address: { type: 'string' },
                 timestamp: { type: 'number' },
             }
+        },
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    user_info: { type: ['null', 'object'] },
+                    properties: {
+                        _id: { type: 'string' },
+                        address: { type: 'string' },
+                        create_at: { type: 'string' },
+                        last_login: { type: 'string' },
+                    }
+                }
+            }
         }
-    }
+    },
+
+
 }
 
 
@@ -24,9 +40,10 @@ export async function userInfo(req: FastifyRequest, rep: FastifyReply) {
         const token = getTokenFromReq(req)
         const { address } = await verifyAuthJwt(token)
         const user_data = await users.findOne({ address })
-        return user_data
-    } catch (e) {
+        return { user_info: user_data }
+    } catch (e: any) {
         ErrorHandler(e, { body: req.body }, userInfo.name)
-        rep.send(e)
+        const errorCode = getHTTPErrorCode(e)
+        rep.code(errorCode).send(e)
     }
 }

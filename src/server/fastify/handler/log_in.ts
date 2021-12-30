@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
+import { getHTTPErrorCode } from ".."
 import { set_cache_user_token } from "../../../cache"
 import { User } from "../../../database/mongo/models/User"
 import { users } from "../../../database/mongo/mongo"
@@ -14,6 +15,14 @@ export const logInSchema: RouteShorthandOptions = {
                 sign_message: { type: 'string' },
                 address: { type: 'string' },
                 timestamp: { type: 'number' },
+            }
+        },
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    token: { type: 'string' },
+                }
             }
         }
     }
@@ -64,8 +73,9 @@ export async function logIn(req: FastifyRequest, rep: FastifyReply) {
         const token = getAuthJWT(address_from_sign_message, timestamp)
         await set_cache_user_token(address_from_sign_message, { timestamp })
         rep.send({ token })
-    } catch (e) {
+    } catch (e:any) {
         ErrorHandler(e, { body: req.body }, logIn.name)
-        rep.send(e)
+        const errorCode = getHTTPErrorCode(e)
+        rep.code(errorCode).send(e)
     }
 }
