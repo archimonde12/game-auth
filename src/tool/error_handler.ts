@@ -26,7 +26,6 @@ export function ErrorHandler(e: any, args: any, funcName: string) {
         console.log(`Argument:`, JSON.parse(JSON.stringify(params)))
         console.log(`Message:`, ErrCodeMessage[errCode] ? ErrCodeMessage[errCode] : message.substring(SERVER_CODE.length + 1))
         console.log('\n========================================================================================')
-        throw new Error(message)
     } else {
         console.log('\n========================================================================================\n')
         console.log('\x1b[31m%s\x1b[0m', `🔥  🔥  🔥  DANGER : UNEXPECTED ERROR HAPPENED!\n `)
@@ -44,8 +43,8 @@ const ErrCodeMessage = {
     GA100: "Token Invalid",
     GA101: "Token Missing",
     GA102: "Token Expired",
-    GA103: "Sign Message invalid",
-    GA104: "Timestamp invalid. Must in 60 seconds",
+    GA200: "Sign Message invalid",
+    GA201: "Timestamp invalid. Must in 60 seconds",
 }
 
 export const ERROR_CODE = {
@@ -55,6 +54,8 @@ export const ERROR_CODE = {
     TOKEN_INVALID: '100',
     TOKEN_MISSING: '101',
     TOKEN_EXPIRED: '102',
-    SIGN_MESSAGE_INVALID: '103',
-    TIME_STAMP_INVALID: '104',
+    //==========PARAMS==============
+    SIGN_MESSAGE_INVALID: '200',
+    TIME_STAMP_INVALID: '201',
 }
+
