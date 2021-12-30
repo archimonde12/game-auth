@@ -1,6 +1,8 @@
 import { errorConsoleLog, successConsoleLog } from "./tool/color-log"
 import { connectMongo, mongo } from "./database/mongo/mongo"
 import { initRedis, ioredis } from "./cache/redis"
+import { initFastify } from "./server/fastify"
+import { connectWeb3 } from "./blockchain/bsc"
 export const check_status = async (not_first_run?: boolean) => {
     try {
         console.log("========================")
@@ -9,6 +11,8 @@ export const check_status = async (not_first_run?: boolean) => {
             await Promise.all([
                 initRedis(),
                 connectMongo(),
+                initFastify(),
+                connectWeb3("PROVIDER")
             ])
             return
         }

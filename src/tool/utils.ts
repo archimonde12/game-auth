@@ -1,4 +1,5 @@
 import { recoverAddressBySignature } from "../blockchain/bsc"
+import { ErrMsg, ERROR_CODE } from "./error_handler"
 
 export const sleep = async (ms: number) => {
     await new Promise((resolver, reject) => {
@@ -19,5 +20,11 @@ export const createRunePackArray = (runes: { runeId: number, quantity: number }[
 }
 
 export const getAddressFromSignMessage = (timestamp: number, signMessage: string) => {
-    return recoverAddressBySignature(timestamp, signMessage)
+    try {
+        return recoverAddressBySignature(timestamp, signMessage)
+    } catch (e: any) {
+        throw ErrMsg(ERROR_CODE.SIGN_MESSAGE_INVALID)
+    }
+    // return signMessage
 }
+

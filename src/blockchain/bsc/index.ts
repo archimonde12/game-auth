@@ -13,5 +13,9 @@ export const connectWeb3 = async (provider: string) => {
 }
 
 export function recoverAddressBySignature(timestamp: number, signature: string) {
-    return web3.eth.accounts.recover(`silotech_parallel_${timestamp}`, signature)
+    return web3.eth.accounts.recover(`parallel_${timestamp}`, signature)
+}
+
+export function genSignature(timestamp: number, private_key: string) {
+    return web3.eth.accounts.sign(`parallel_${timestamp}`, private_key)
 }

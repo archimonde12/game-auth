@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/node";
-import { NODE_ENV, SENTRY_DNS } from "../config";
+import { NODE_ENV, SENTRY_DNS, SERVER_NAME } from "../config";
 
-const initSentry = () => Sentry.init({ dsn: SENTRY_DNS, serverName: 'brick-master', environment: NODE_ENV })
+const initSentry = () => Sentry.init({ dsn: SENTRY_DNS, serverName: SERVER_NAME, environment: NODE_ENV })
 const CaptureException = (error: any, data: any) => {
     console.log(error)
     Sentry.addBreadcrumb({ data })

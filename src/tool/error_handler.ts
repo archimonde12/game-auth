@@ -1,7 +1,7 @@
 import { SERVER_CODE } from "../config"
 import { CaptureException } from "../logging/sentry"
 
-export const genCodeName = (msg: string) => `${SERVER_CODE}:${msg}`
+export const genCodeName = (msg: string) => `${SERVER_CODE}:${msg} ${ErrCodeMessage[SERVER_CODE + msg]}`
 export const ErrMsg = (msg: string) => {
     return new Error(genCodeName(msg))
 }
@@ -40,11 +40,21 @@ export function ErrorHandler(e: any, args: any, funcName: string) {
 }
 
 const ErrCodeMessage = {
-    BOX000: "Action fail because unexpected error",
+    GA000: "Action fail because unexpected error",
+    GA100: "Token Invalid",
+    GA101: "Token Missing",
+    GA102: "Token Expired",
+    GA103: "Sign Message invalid",
+    GA104: "Timestamp invalid. Must in 60 seconds",
 }
 
 export const ERROR_CODE = {
     //==========UNEXPECTED ERROR==========
     UNEXPECTED_ERROR: '000',
     //==========AUTH==============
+    TOKEN_INVALID: '100',
+    TOKEN_MISSING: '101',
+    TOKEN_EXPIRED: '102',
+    SIGN_MESSAGE_INVALID: '103',
+    TIME_STAMP_INVALID: '104',
 }
