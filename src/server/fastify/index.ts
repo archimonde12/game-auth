@@ -13,7 +13,7 @@ const methods = {
     create_sign_message: "/create_sign_message",
 }
 fastify.post(methods.log_in, logInSchema, logIn)
-fastify.post(methods.user_info, userInfo)
+fastify.get(methods.user_info, userInfo)
 fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_sign_message)
 
 export const initFastify = async () => {
