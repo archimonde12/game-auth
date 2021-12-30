@@ -17,7 +17,7 @@ fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_s
 
 export const initFastify = async () => {
     try {
-        const quest = await fastify.listen(PORT)
+        const quest = await fastify.listen({port:PORT,host:"0.0.0.0"})
         successConsoleLog(`🚀 ${SERVER_NAME} fastify ready at ${quest}`);
     } catch (err: any) {
         console.log(err)

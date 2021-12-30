@@ -26,7 +26,7 @@ if (!process.env.MONGO_URI) throw new Error(`MONGO_URI must be provided`)
 export const MONGO_URI = process.env.MONGO_URI
 
 if (!process.env.PORT) throw new Error(`PORT must be provided`)
-export const PORT = process.env.PORT
+export const PORT = parseInt(process.env.PORT)
 
 if (!process.env.REDIS_URI) throw new Error(`REDIS_URI must be provided`)
 export const REDIS_URI = process.env.REDIS_URI
@@ -38,7 +38,7 @@ export const REDIS_PREFIX = process.env.REDIS_PREFIX
 if (!process.env.SERVER_CODE) throw new Error(`SERVER_CODE must be provided`)
 export const SERVER_CODE = process.env.SERVER_CODE
 
-if (!process.env.JWT_AUTH_EXPIRATION_IN_SEC) throw new Error(`JWT_AUTH_EXPIRATION_IN_SEC m1ust be provided`)
+if (!process.env.JWT_AUTH_EXPIRATION_IN_SEC) throw new Error(`JWT_AUTH_EXPIRATION_IN_SEC must be provided`)
 export const JWT_AUTH_EXPIRATION_IN_SEC = parseInt(process.env.JWT_AUTH_EXPIRATION_IN_SEC)
 
 
