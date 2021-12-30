@@ -110,3 +110,5 @@ dist
 
 # Test file
 test.ts
+
+*env
