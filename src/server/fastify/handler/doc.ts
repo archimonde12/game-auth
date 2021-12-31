@@ -76,18 +76,19 @@
  *     "timestamp": 1640923500
  * }
  * @apiUse ErrorFormat
- * @apiErrorExample {json} Timestamp invalid
- *     {
- *       "statusCode": 400,
- *       "error": "Bad Request",
- *       "message": "GA:201 Timestamp invalid. Must in 60 seconds"
- *     }
  * @apiErrorExample {json} Sign message invalid
  *     {
  *       "statusCode": 400,
  *       "error": "Bad Request",
  *       "message": "GA:200 Sign Message invalid"
  *     }
+ * @apiErrorExample {json} Timestamp invalid
+ *     {
+ *       "statusCode": 400,
+ *       "error": "Bad Request",
+ *       "message": "GA:201 Timestamp invalid. Must in 60 seconds"
+ *     }
+
  * @apiUse InternalError
  * @apiUse Token
  */
@@ -97,8 +98,8 @@
  * @apiGroup User
  * @apiUse Authorization
  * @apiUse ErrorFormat
- * @apiUse TokenMissing
  * @apiUse TokenInvalid
+ * @apiUse TokenMissing
  * @apiUse TokenExpired
  * @apiUse InternalError
  * @apiSuccess (Success) {Object|Null} result User's info
@@ -122,8 +123,8 @@
  * @apiGroup User
  * @apiUse Authorization
  * @apiUse ErrorFormat
- * @apiUse TokenMissing
  * @apiUse TokenInvalid
+ * @apiUse TokenMissing
  * @apiUse TokenExpired
  * @apiUse InternalError
  * @apiUse Token
