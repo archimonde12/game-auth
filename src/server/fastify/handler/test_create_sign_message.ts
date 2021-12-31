@@ -2,7 +2,6 @@ import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
 import { getHTTPErrorCode } from ".."
 import { genSignature } from "../../../blockchain/bsc"
 import { ErrorHandler } from "../../../tool/error_handler"
-import { userInfo } from "./user_info"
 
 export const CreateSignMessageSchema: RouteShorthandOptions = {
     schema: {

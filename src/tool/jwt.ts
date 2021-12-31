@@ -35,19 +35,20 @@ export const verifyAuthJwt = async (token: string | undefined): Promise<AuthJwt>
     try {
         if (!token) throw ErrMsg(ERROR_CODE.TOKEN_MISSING)
         const verified = verifyJWT(token, JwtType.auth) as AuthJwt
-        if (verified?.address && verified?.timestamp) {
-            const cached_token = await get_cache_user_token(verified.address)
-            console.log(cached_token)
-            const cached_token_exist = cached_token ? true : false
-            const cached_timestamp_not_match = cached_token?.timestamp !== verified.timestamp
-            if (cached_token_exist && cached_timestamp_not_match) throw ErrMsg(ERROR_CODE.TOKEN_EXPIRED)
-            return verified
-        }
+        if (verified?.address && verified?.timestamp) return verified
         throw ErrMsg(ERROR_CODE.TOKEN_INVALID)
     } catch (e: any) {
         throw e.message === 'jwt expired' || e.name === 'TokenExpiredError' ? ErrMsg(ERROR_CODE.TOKEN_EXPIRED) : e
     }
 }
 
-
-
+export const check_cached_token = async (token_data: AuthJwt) => {
+    try {
+        const cached_token = await get_cache_user_token(token_data.address)
+        const cached_token_exist = cached_token ? true : false
+        const cached_timestamp_not_match = cached_token?.timestamp !== token_data.timestamp
+        if (cached_token_exist && cached_timestamp_not_match) throw ErrMsg(ERROR_CODE.TOKEN_EXPIRED)
+    } catch (e: any) {
+        throw e
+    }
+}
