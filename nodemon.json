@@ -1,0 +1,6 @@
+{
+  "events": {
+    "restart": "npm run doc",
+    "start": "npm run doc"
+  }
+}

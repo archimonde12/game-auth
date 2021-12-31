@@ -7,7 +7,7 @@
     "@types/ioredis": "^4.28.4",
     "@types/jsonwebtoken": "^8.5.6",
     "@types/node": "^16.10.3",
-    "nodemon": "^2.0.13",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
@@ -31,12 +31,12 @@
     "script": "node script.mjs",
     "test": "ts-node src/test/index.ts",
     "build": "rm -rf dist && tsc",
-    "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
+    "start": "npm run doc && node dist/index.js",
+    "dev": "nodemon src/index.ts",
     "dep": "docker-compose -f docker-compose.yml up --build -d",
     "dep:log": "docker-compose -f docker-compose.yml up --build",
     "reset": "ts-node src/scripts/reset.ts",
-    "doc": "apidoc -i src -o apidoc"
+    "doc": "rm -rf apidoc && apidoc -i src -o apidoc"
   },
   "repository": {
     "type": "git",
@@ -48,5 +48,10 @@
   "bugs": {
     "url": "https://github.com/congnt171/pp-layer/issues"
   },
-  "homepage": "https://github.com/congnt171/pp-layer#readme"
+  "homepage": "https://github.com/congnt171/pp-layer#readme",
+  "apidoc": {
+    "title": "prl_game_auth",
+    "name": "Parallel Game Authentication",
+    "description": "REST API"
+  }
 }
