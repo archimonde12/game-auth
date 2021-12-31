@@ -29,7 +29,7 @@ export async function refresh(req: FastifyRequest, rep: FastifyReply) {
         const now_in_sec = timeSystem.getNowInSec()
         const new_token = getAuthJWT(tokenData.address, now_in_sec)
         await set_cache_user_token(tokenData.address, { timestamp: now_in_sec })
-        return new_token
+        return {token:new_token}
     } catch (e: any) {
         ErrorHandler(e, { body: req.body }, refresh.name)
         const errorCode = getHTTPErrorCode(e)
