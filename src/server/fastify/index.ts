@@ -7,8 +7,11 @@ import { logIn, logInSchema } from "./handler/log_in"
 import { refresh, RefreshSchema } from "./handler/refresh"
 import { CreateSignMessageSchema, test_create_sign_message } from "./handler/test_create_sign_message"
 import { userInfo, UserInfoSchema } from "./handler/user_info"
-
+import cors from "fastify-cors"
 const fastify = Fastify({ logger: false })
+fastify.register(cors, {
+    origin: ["*"]
+})
 const methods = {
     log_in: "/log_in",
     refresh: "/refresh",
@@ -16,7 +19,7 @@ const methods = {
     create_sign_message: "/create_sign_message",
 }
 fastify.post(methods.log_in, logInSchema, logIn)
-fastify.get(methods.user_info, UserInfoSchema,userInfo)
+fastify.get(methods.user_info, UserInfoSchema, userInfo)
 fastify.get(methods.refresh, RefreshSchema, refresh)
 fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_sign_message)
 fastify.register(require("fastify-static"), {

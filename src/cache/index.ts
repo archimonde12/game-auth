@@ -15,6 +15,8 @@ export const ClearRedis = () => {
             })
             return pipeline.exec()
         }
+        console.log("data",keys)
+       stream.pause()
     })
 }
 export {

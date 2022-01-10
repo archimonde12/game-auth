@@ -2010,6 +2010,14 @@
   "resolved" "https://registry.npmjs.org/fastest-levenshtein/-/fastest-levenshtein-1.0.12.tgz"
   "version" "1.0.12"
 
+"fastify-cors@^6.0.2":
+  "integrity" "sha512-sE0AOyzmj5hLLRRVgenjA6G2iOGX35/1S3QGYB9rr9TXelMZB3lFrXy4CzwYVOMiujJeMiLgO4J7eRm8sQSv8Q=="
+  "resolved" "https://registry.npmjs.org/fastify-cors/-/fastify-cors-6.0.2.tgz"
+  "version" "6.0.2"
+  dependencies:
+    "fastify-plugin" "^3.0.0"
+    "vary" "^1.1.2"
+
 "fastify-error@^0.3.0":
   "integrity" "sha512-Jm2LMTB5rsJqlS1+cmgqqM9tTs0UrlgYR7TvDT3ZgXsUI5ib1NjQlqZHf+tDK5tVPdFGwyq02wAoJtyYIRSiFA=="
   "resolved" "https://registry.npmjs.org/fastify-error/-/fastify-error-0.3.0.tgz"
@@ -4751,7 +4759,7 @@
   "resolved" "https://registry.npmjs.org/varint/-/varint-5.0.2.tgz"
   "version" "5.0.2"
 
-"vary@^1", "vary@~1.1.2":
+"vary@^1", "vary@^1.1.2", "vary@~1.1.2":
   "integrity" "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="
   "resolved" "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   "version" "1.1.2"
