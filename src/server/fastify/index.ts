@@ -10,7 +10,7 @@ import { userInfo, UserInfoSchema } from "./handler/user_info"
 import cors from "fastify-cors"
 const fastify = Fastify({ logger: false })
 fastify.register(cors, {
-    origin: ["*"]
+    origin: false
 })
 const methods = {
     log_in: "/log_in",
