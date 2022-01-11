@@ -4,9 +4,11 @@ import { MONGO_URI } from "../../config";
 import { User, UserIndexes } from "./models/User";
 
 let mongo: MongoClient
-export let users:Collection<User>
+export let users: Collection<User>
+export let lands: Collection<User>
 const collections = {
-    users: "users"
+    users: "users",
+    lands: "lands",
 }
 
 export const checkModelInDb = async (params: { schema: any, collection: Collection<any> }[]) => {
@@ -61,9 +63,11 @@ const connectMongo = async () => {
 
         const db = mongo.db()
         users = db.collection(collections.users)
+        lands = db.collection(collections.lands)
         console.log(`mongodb: insert indexes ...`)
         await Promise.all([
             users.createIndexes(UserIndexes),
+            lands.createIndexes(UserIndexes),
         ])
         successConsoleLog(`🚀 mongodb: connected`)
     } catch (e) {

@@ -6,6 +6,7 @@ import { set_cache_user_token } from "../../../cache"
 import { timeSystem } from "../../../tool/time-system"
 
 import { getHTTPErrorCode, getTokenFromReq } from ".."
+import { sendRep } from "./log_in"
 
 export const RefreshSchema: RouteShorthandOptions = {
     schema: {
@@ -29,10 +30,11 @@ export async function refresh(req: FastifyRequest, rep: FastifyReply) {
         const now_in_sec = timeSystem.getNowInSec()
         const new_token = getAuthJWT(tokenData.address, now_in_sec)
         await set_cache_user_token(tokenData.address, { timestamp: now_in_sec })
-        return {token:new_token}
+        sendRep(rep, { token: new_token })
     } catch (e: any) {
         ErrorHandler(e, { body: req.body }, refresh.name)
         const errorCode = getHTTPErrorCode(e)
-        rep.code(errorCode).send(e)
+        rep.code(errorCode)
+        sendRep(rep,e)
     }
 }

@@ -8,11 +8,10 @@ import { refresh, RefreshSchema } from "./handler/refresh"
 import { CreateSignMessageSchema, test_create_sign_message } from "./handler/test_create_sign_message"
 import { userInfo, UserInfoSchema } from "./handler/user_info"
 import cors from "fastify-cors"
-import requestIp from "request-ip"
 const fastify = Fastify({ logger: false })
 
 fastify.register(cors, (instance) => (req, callback) => {
-    const clientIp = requestIp.getClientIp(req);
+    // const clientIp = requestIp.getClientIp(req);
     callback(null, { origin: false }) // callback expects two parameters: error and options
 })
 const methods = {
@@ -28,6 +27,14 @@ fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_s
 fastify.register(require("fastify-static"), {
     root: path.join(__dirname, "/../../../apidoc"),
     prefix: "/"
+})
+
+fastify.addHook("preHandler", (req, rep, done) => {
+    rep.header("Access-Control-Allow-Origin", "*")
+    rep.header("Access-Control-Allow-Credentials", "true")
+    rep.header("Access-Control-Allow-Headers", "Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time")
+    rep.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    done()
 })
 
 export const initFastify = async () => {

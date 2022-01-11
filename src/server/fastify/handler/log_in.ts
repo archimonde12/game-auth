@@ -33,6 +33,10 @@ const CheckValidTimestamp = (timestamp: number, valid_range_in_sec: number) => {
     return timestamp > limit_valid_timestamp
 }
 
+export const sendRep = (rep: FastifyReply, value: any) => {
+   
+    rep.send(value)
+}
 export async function logIn(req: FastifyRequest, rep: FastifyReply) {
     try {
         const { sign_message, address, timestamp } = req.body as { sign_message: string, address: string, timestamp: number }
@@ -57,10 +61,11 @@ export async function logIn(req: FastifyRequest, rep: FastifyReply) {
         await users.insertOne(new_user)
         const token = getAuthJWT(address_from_sign_message, timestamp)
         await set_cache_user_token(address_from_sign_message, { timestamp })
-        rep.send({ token })
-    } catch (e:any) {
+        sendRep(rep, { token })
+    } catch (e: any) {
         ErrorHandler(e, { body: req.body }, logIn.name)
         const errorCode = getHTTPErrorCode(e)
-        rep.code(errorCode).send(e)
+        rep.code(errorCode)
+        sendRep(rep,e)
     }
 }
