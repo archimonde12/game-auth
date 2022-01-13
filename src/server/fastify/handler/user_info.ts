@@ -23,8 +23,6 @@ export const UserInfoSchema: RouteShorthandOptions = {
             }
         }
     },
-
-
 }
 
 

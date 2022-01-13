@@ -1,22 +1,13 @@
 import { IndexDescription } from "mongodb";
 
 
-export type Land = {
+export type Planet = {
     planetId: string
-    landId: string
-    landName: string
-    nftHash: string
-    mapImage: string
-    landImage: string
-    x1: number
-    y1: number
-    z1: number
-    x2: number
-    y2: number
-    z2: number
+    planetName: string
+    planetType: number
 }
 
-export const LandIndexes: IndexDescription[] = [
+export const PlanetIndexes: IndexDescription[] = [
     { key: { landId: 1 }, unique: true, background: true },
     { key: { landName: 1 }, background: true },
     { key: { planetId: 1 }, background: true },

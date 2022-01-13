@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function updateStats(memuse) {
+            document.getElementById('rss').innerHTML = memuse.rss;
+            document.getElementById('heapTotal').innerHTML = memuse.heapTotal;
+            document.getElementById('heapUsed').innerHTML = memuse.heapUsed;
+        }
+        // var host = window.document.location.host.replace(/:.*/, '');
+        var ws = new WebSocket('ws://localhost:5599/ws');
+
+        ws.addEventListener("open", function (event) {
+            ws.send(JSON.stringify({ token: "abc" }))
+        })
+        // ws.addEventListener("message", function (event) {
+        //     ws.send('Message from server', event.data)
+        // })
+
+        ws.onmessage = (e) => {
+            console.log(e.data)
+        }
+        // ws.onopen = () => {
+        //     console.log("connected with server")
+        //     ws.send({
+        //         token: "ABC"
+        //     })
+        // }
+        // ws.onmessage = function (event) {
+        //     updateStats(JSON.parse(event.data));
+        // };
+
+
+    </script>
+</body>
+
+</html>
