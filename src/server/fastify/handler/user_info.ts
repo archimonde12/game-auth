@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
 import { getHTTPErrorCode, getTokenFromReq } from ".."
 import { users } from "../../../database/mongo/mongo"
 import { ErrorHandler } from "../../../tool/error_handler"
-import { check_cached_token, verifyAuthJwt } from "../../../tool/jwt"
+import { checkCachedToken, verifyAuthJwt } from "../../../tool/jwt"
 import { sendRep } from "./log_in"
 export const UserInfoSchema: RouteShorthandOptions = {
     schema: {
@@ -30,7 +30,7 @@ export async function userInfo(req: FastifyRequest, rep: FastifyReply) {
     try {
         const token = getTokenFromReq(req)
         const tokenData = await verifyAuthJwt(token)
-        await check_cached_token(tokenData)
+        await checkCachedToken(tokenData)
         const user_data = await users.findOne({ address: tokenData.address })
         sendRep(rep, { result: user_data })
     } catch (e: any) {

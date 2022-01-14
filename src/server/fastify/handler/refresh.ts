@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
 
-import { check_cached_token, getAuthJWT, verifyAuthJwt } from "../../../tool/jwt"
+import { checkCachedToken, getAuthJWT, verifyAuthJwt } from "../../../tool/jwt"
 import { ErrorHandler } from "../../../tool/error_handler"
 import { set_cache_user_token } from "../../../cache"
 import { timeSystem } from "../../../tool/time-system"
@@ -26,7 +26,7 @@ export async function refresh(req: FastifyRequest, rep: FastifyReply) {
     try {
         const token = getTokenFromReq(req)
         const tokenData = await verifyAuthJwt(token)
-        await check_cached_token(tokenData)
+        await checkCachedToken(tokenData)
         const now_in_sec = timeSystem.getNowInSec()
         const new_token = getAuthJWT(tokenData.address, now_in_sec)
         await set_cache_user_token(tokenData.address, { timestamp: now_in_sec })

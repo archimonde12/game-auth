@@ -1,13 +1,14 @@
 import { IndexDescription } from "mongodb";
 
 
-export type Land = {
+export interface Land {
     planetId: string
     landId: string
     landName: string
     nftHash: string
     mapImage: string
     landImage: string
+    owner: ""
     x1: number
     y1: number
     z1: number

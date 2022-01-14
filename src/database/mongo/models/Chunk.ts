@@ -1,7 +1,8 @@
 import { IndexDescription } from "mongodb";
 
 export type Chunk = {
-    chunkId: string
+    landId: string,
+    chunkId: string,
     x: number,
     y: number,
     z: number,

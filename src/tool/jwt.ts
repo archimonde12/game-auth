@@ -42,7 +42,7 @@ export const verifyAuthJwt = async (token: string | undefined): Promise<AuthJwt>
     }
 }
 
-export const check_cached_token = async (token_data: AuthJwt) => {
+export const checkCachedToken = async (token_data: AuthJwt) => {
     try {
         const cached_token = await get_cache_user_token(token_data.address)
         const cached_token_exist = cached_token ? true : false

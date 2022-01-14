@@ -11,33 +11,28 @@ import websocket from "fastify-websocket"
 import cors from "fastify-cors"
 import { BlockTypesSchema, getBlockTypes } from "./handler/get_block_types";
 import { getLandList, LandListSchema } from "./handler/get_lands_list";
+import { methods } from "./methos";
+import { ChunkListSchema, getListChunks } from "./handler/get_list_chunks";
+import { getListObject, ObjectListSchema } from "./handler/get_list_objects";
+import { SendChunksSchema, sendListChunks } from "./handler/send_list_chunk";
+import { sendListObjects, SendObjectsSchema } from "./handler/send_list_object";
+import { submitLand, SubmitLandSchema } from "./handler/submit_land";
+import { resetLand, ResetLandSchema } from "./handler/reset_land";
+import { removeObjects, RemoveObjectSchema } from "./handler/remove_objects";
+import { AddLand } from "../../local/Land";
+import { LAND_LIST } from "../../mockup-data/Lands";
+//https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
 const fastify = Fastify({ logger: false })
-// const fastify = Fastify({ logger: false })
 fastify.register(cors, (instance) => (req, callback) => {
-    // const clientIp = requestIp.getClientIp(req);
     callback(null, { origin: false }) // callback expects two parameters: error and options
 })
-const methods = {
-    log_in: "/log_in",
-    get_land_list: "/get_land_list",
-    get_block_types: "/get_block_types",
-    refresh: "/refresh",
-    user_info: "/user_info",
-    create_sign_message: "/create_sign_message",
-}
+
 fastify.register(websocket)
 fastify.get('/ws', { websocket: true }, function wsHandler(conn, req) {
     conn.socket.on('message', (message: Buffer) => {
         const data = JSON.parse(message.toString())
         console.log(data)
-        // message.toString() === 'hi from client'
-        // conn.socket.send('hi from server')
     })
-    // conn.socket.emit("message", "Hello world")
-    // conn.socket.on('message', message => {
-    //     // message.toString() === 'hi from client'
-    //     conn.socket.send('hi from server')
-    // })
     conn.socket.send(JSON.stringify({}))
 })
 fastify.post(methods.log_in, logInSchema, logIn)
@@ -46,6 +41,13 @@ fastify.get(methods.user_info, UserInfoSchema, userInfo)
 fastify.get(methods.refresh, RefreshSchema, refresh)
 fastify.get(methods.get_block_types, BlockTypesSchema, getBlockTypes)
 fastify.get(methods.get_land_list, LandListSchema, getLandList)
+fastify.get(methods.get_list_chunks, ChunkListSchema, getListChunks)
+fastify.get(methods.get_list_objects, ObjectListSchema, getListObject)
+fastify.post(methods.send_list_chunk, SendChunksSchema, sendListChunks)
+fastify.post(methods.send_list_object, SendObjectsSchema, sendListObjects)
+fastify.post(methods.submit_land, SubmitLandSchema, submitLand)
+fastify.post(methods.reset_land, ResetLandSchema, resetLand)
+fastify.post(methods.remove_objects, RemoveObjectSchema, removeObjects)
 fastify.register(require("fastify-static"), {
     root: path.join(__dirname, "/../../../apidoc"),
     prefix: "/"
@@ -61,8 +63,11 @@ fastify.addHook("preHandler", (req, rep, done) => {
 
 export const initFastify = async () => {
     try {
-        const quest = await fastify.listen({ port: PORT, host: "0.0.0.0" })
-        successConsoleLog(`🚀 ${SERVER_NAME} fastify ready at ${quest}`);
+        const server = await fastify.listen({ port: PORT, host: "0.0.0.0" })
+        successConsoleLog(`🚀 ${SERVER_NAME} fastify ready at ${server}`);
+        for (let land of LAND_LIST) { 
+            AddLand(land)
+        }
     } catch (err: any) {
         console.log(err)
         fastify.log.error(err)
@@ -73,7 +78,6 @@ export const initFastify = async () => {
 
 export const getTokenFromReq = (req: FastifyRequest) => {
     const { authorization } = req.headers
-    console.log({authorization})
     return authorization
 }
 

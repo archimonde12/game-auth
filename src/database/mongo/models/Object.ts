@@ -1,6 +1,7 @@
 import { IndexDescription } from "mongodb";
 
 export type Object = {
+    landId: string
     objectHash: string
     objectId: string
     x: number,
