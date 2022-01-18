@@ -7,6 +7,7 @@ export type BlockTexture = {
 }
 export type BlockType = {
     uniqueTypeId: string
+    icon:string
     blockName: string
     lampColor: string
     quantity: number
@@ -18,6 +19,7 @@ export const BlockTypeIndexes: IndexDescription[] = [
     { key: { uniqueTypeId: 1 }, unique: true, background: true },
     { key: { blockName: 1 }, background: true },
     { key: { lampColor: 1 }, background: true },
+    { key: { icon: 1 }, background: true },
     { key: { quantity: 1 }, background: true },
     { key: { faceType: 1 }, background: true },
 ]

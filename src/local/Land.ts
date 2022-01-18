@@ -7,7 +7,8 @@ interface BackupLand extends Land {
 export const LocalLands: BackupLand[] = []
 
 export const AddLand = (new_land: Land) => {
-    LocalLands.push({ ...new_land, backupChunks: CreateChunksByLand(new_land.landId) })
+    const { landId, x1, x2, y1, y2 } = new_land
+    LocalLands.push({ ...new_land, backupChunks: CreateChunksByLand({ landId, x1, x2, y1, y2 }) })
 }
 
 export const SubmitLand = (landId: string) => {
@@ -17,13 +18,18 @@ export const SubmitLand = (landId: string) => {
 
 export const GetBackupChunkLand = (landId: string) => {
     const index = LocalLands.findIndex(land => land.landId === landId)
-    if (index > -1) return LocalLands[index].backupChunks || CreateChunksByLand(landId)
-    return CreateChunksByLand(landId)
+    const { x1, x2, y1, y2 } = LocalLands[index]
+    if (index > -1) return LocalLands[index].backupChunks || CreateChunksByLand({ landId, x1, x2, y1, y2 })
+    return CreateChunksByLand({ landId, x1, x2, y1, y2 })
 }
 
-export const GetLands = () => {
+export const GetAllLands = () => {
     return LocalLands.map((land) => {
         const { backupChunks, ...landWithoutBackup } = land
         return landWithoutBackup
     })
+}
+
+export const GetLand = (landId: string) => {
+    return LocalLands.find((land) => land.landId === landId)
 }

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from "fastify"
 import { getHTTPErrorCode, getTokenFromReq } from ".."
 import { Land } from "../../../database/mongo/models/Land"
-import { GetLands, LocalLands } from "../../../local/Land"
+import { GetAllLands, LocalLands } from "../../../local/Land"
 import { ErrorHandler } from "../../../tool/error_handler"
 import { checkCachedToken, verifyAuthJwt } from "../../../tool/jwt"
 export const LandListSchema: RouteShorthandOptions = {
@@ -24,8 +24,8 @@ export async function getLandList(req: FastifyRequest, rep: FastifyReply) {
         const token = getTokenFromReq(req)
         const tokenData = await verifyAuthJwt(token)
         await checkCachedToken(tokenData)
-        console.log(GetLands())
-        rep.send({ result: GetLands() })
+        console.log(GetAllLands())
+        rep.send({ result: GetAllLands() })
     } catch (e: any) {
         ErrorHandler(e, { body: req.body }, getLandList.name)
         const errorCode = getHTTPErrorCode(e)

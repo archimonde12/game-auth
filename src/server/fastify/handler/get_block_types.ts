@@ -25,6 +25,7 @@ const BLOCK_TYPES: BlockType[] = [
         lampColor: "998066",
         quantity: 999999,
         faceType: 2,
+        icon: "https://drive.google.com/file/d/1NiYa4zrWkAVbv5BtpjTAz25VUiJbruhM/view",
         faces: [{
             texture: "https://media.istockphoto.com/photos/earth-texture-macro-photography-pattern-background-picture-id1277752567?k=20&m=1277752567&s=612x612&w=0&h=fHnOc6HznYZreHs5baH5e2448U-Eua6to66qoHf05Ds=",
             normals: "https://www.researchgate.net/profile/Andreas-Junker-3/publication/344587438/figure/fig4/AS:989314339074049@1612882327388/From-left-to-right-Wind-map-Texture-and-Normal-map-The-wind-map-is-a-texture-composed.ppm",
@@ -37,6 +38,7 @@ const BLOCK_TYPES: BlockType[] = [
         lampColor: "ffe4e1",
         quantity: 999999,
         faceType: 2,
+        icon: "https://drive.google.com/file/d/1NiYa4zrWkAVbv5BtpjTAz25VUiJbruhM/view",
         faces: [{
             texture: "https://previews.123rf.com/images/kelifamily/kelifamily2003/kelifamily200300136/142473392-gray-stone-wall-for-the-background-gray-stone-texture.jpg",
             normals: "https://thumbs.dreamstime.com/b/r-stone-wall-normal-map-computer-generated-texture-masonry-differently-sized-stones-insert-concrete-seamless-tileable-repeating-99018769.jpg",
@@ -49,6 +51,7 @@ const BLOCK_TYPES: BlockType[] = [
         lampColor: "",
         quantity: 999999,
         faceType: 2,
+        icon: "https://drive.google.com/file/d/1NiYa4zrWkAVbv5BtpjTAz25VUiJbruhM/view",
         faces: [{
             texture: "https://media.istockphoto.com/photos/laminate-wooden-floor-texture-background-picture-id1083302826?b=1&k=20&m=1083302826&s=170667a&w=0&h=ePdma8I7u7KHs2YbehQSVcCX9qay5iPr3wynsWnzFZ0=",
             normals: "https://www.filterforge.com/filters/7851-normal.jpg",

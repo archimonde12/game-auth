@@ -1,14 +1,15 @@
 import { Chunk } from "../database/mongo/models/Chunk"
-import { GetBackupChunkLand } from "./Land"
+import { GetBackupChunkLand, GetLand } from "./Land"
 
 export const LocalChunks: Chunk[] = []
 const createChunkId = (x: number, y: number, z: number) => x.toString() + "_" + y.toString() + "_" + z.toString()
 const CreateEmptyChunk = (x: number, y: number, z: number, landId: string) => {
-    return { x, y, z, landId, chunkId: createChunkId(x, y, z), blockTypes: [], blocks: [] } as Chunk
+    return { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] } as Chunk
 }
-export const CreateChunksByLand = (landId: string) => {
-    const land_length = 20
-    const land_width = 20
+export const CreateChunksByLand = (params: { landId: string, x1: number, x2: number, y1: number, y2: number, }) => {
+    const { landId, x2, x1, y2, y1 } = params
+    const land_length = x2 - x1
+    const land_width = y2 - y1
     const chunks: Chunk[] = []
     for (let i = 0; i < land_length; i++) {
         for (let j = 0; j < land_width; j++) {
@@ -29,7 +30,7 @@ export const GetChunks = (x: number, y: number, r: number, landId: string) => {
     const chunks: Chunk[] = []
     for (let i = bound_x_min; i < bound_x_max + 1; i++) {
         for (let j = bound_y_min; j < bound_y_max + 1; j++) {
-            for (let k = -1; k < 18; k++) {
+            for (let k = -2; k < 4; k++) {
                 const foundChunk = LocalChunks.find(chunk => chunk.chunkId === createChunkId(i, j, k) && chunk.landId === landId)
                 if (foundChunk) chunks.push(foundChunk)
             }

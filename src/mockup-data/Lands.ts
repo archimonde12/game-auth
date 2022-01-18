@@ -10,25 +10,25 @@ export const LAND_LIST: Land[] = [
         planetId: "0",
         owner: "",
         x1: 0,
-        x2: 100,
         y1: 0,
-        y2: 100,
-        z1: -20,
-        z2: 40
+        z1: -2,
+        x2: 20,
+        y2: 20,
+        z2: 4
     },
     {
-        landId: "1",
+        landId: "1", 
         landName: "GreatWall",
         nftHash: "0x" + Buffer.from("GreatWall").toString("hex"),
         mapImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwaMuv62MoFnOKxAw46ItCuHRpa6qKvZLf2Q&usqp=CAU",
         landImage: "https://i.imgur.com/v91tkIR.jpg",
         planetId: "0",
         owner: "",
-        x1: 100,
-        x2: 200,
-        y1: 100,
-        y2: 200,
-        z1: -20,
-        z2: 40
+        x1: 20,
+        y1: 20,
+        z1: -2,
+        x2: 40,
+        y2: 40,
+        z2: 4
     },
 ]

@@ -8,11 +8,9 @@ export type Planet = {
 }
 
 export const PlanetIndexes: IndexDescription[] = [
-    { key: { landId: 1 }, unique: true, background: true },
-    { key: { landName: 1 }, background: true },
+    { key: { planetType: 1 }, unique: true, background: true },
+    { key: { planetName: 1 }, background: true },
     { key: { planetId: 1 }, background: true },
-    { key: { nftHash: 1 }, background: true },
-    { key: { mapImage: 1 }, background: true },
 ]
 
 
