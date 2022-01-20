@@ -6,7 +6,10 @@ const createChunkId = (x: number, y: number, z: number) => x.toString() + "_" + 
 const CreateEmptyChunk = (x: number, y: number, z: number, landId: string) => {
     return { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] } as Chunk
 }
-export const CreateChunksByLand = (params: { landId: string, x1: number, x2: number, y1: number, y2: number, }) => {
+const CreateLandChunk = (x: number, y: number, z: number, landId: string) => {
+    return { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] } as Chunk
+}
+export const CreateInitChunksByLand = (params: { landId: string, x1: number, x2: number, y1: number, y2: number, }) => {
     const { landId, x2, x1, y2, y1 } = params
     const land_length = x2 - x1
     const land_width = y2 - y1
