@@ -49,7 +49,7 @@ export const GetChunks = (x: number, y: number, r: number, landId: string) => {
         for (let j = bound_y_min; j < bound_y_max + 1; j++) {
             for (let k = -2; k < 4; k++) {
                 const foundChunk = LocalChunks.find(chunk => chunk.chunkId === createChunkId(i, j, k) && chunk.landId === landId)
-                if (foundChunk) chunks.push(foundChunk)
+                if (foundChunk&&foundChunk.blocks.length) chunks.push(foundChunk)
             }
         }
     }
