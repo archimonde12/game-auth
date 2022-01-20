@@ -6,8 +6,15 @@ const createChunkId = (x: number, y: number, z: number) => x.toString() + "_" + 
 const CreateEmptyChunk = (x: number, y: number, z: number, landId: string) => {
     return { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] } as Chunk
 }
-const CreateLandChunk = (x: number, y: number, z: number, landId: string) => {
-    return { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] } as Chunk
+const CreateFullChunk = (x: number, y: number, z: number, landId: string) => {
+    let chunk: Chunk = { x, y, z, landId, chunkId: createChunkId(x, y, z), blocks: [] }
+    for (let i = 0; i < 16; i++) {
+        chunk.blocks[i] = []
+        for (let j = 0; j < 16; j++) {
+            chunk.blocks[i][j] = 1
+        }
+    }
+    return chunk
 }
 export const CreateInitChunksByLand = (params: { landId: string, x1: number, x2: number, y1: number, y2: number, }) => {
     const { landId, x2, x1, y2, y1 } = params
@@ -16,9 +23,16 @@ export const CreateInitChunksByLand = (params: { landId: string, x1: number, x2:
     const chunks: Chunk[] = []
     for (let i = 0; i < land_length; i++) {
         for (let j = 0; j < land_width; j++) {
-            for (let k = 0; k < 8; k++) {
-                chunks.push(CreateEmptyChunk(i, j, k, landId))
-                LocalChunks.push(CreateEmptyChunk(i, j, k, landId))
+            for (let k = -2; k < 4; k++) {
+                if (k > -1) {
+                    const emptyChunk = CreateEmptyChunk(i, j, k, landId)
+                    chunks.push(emptyChunk)
+                    LocalChunks.push(emptyChunk)
+                } else {
+                    const fullChunk = CreateFullChunk(i, j, k, landId)
+                    chunks.push(fullChunk)
+                    LocalChunks.push(fullChunk)
+                }
             }
         }
     }
