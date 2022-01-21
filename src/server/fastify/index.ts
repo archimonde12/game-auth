@@ -58,8 +58,9 @@ fastify.addHook("preHandler", (req, rep, done) => {
     rep.header("Access-Control-Allow-Credentials", "true")
     rep.header("Access-Control-Allow-Headers", "Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time")
     rep.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    if (req.routerPath === '*' && req.routerMethod === 'OPTIONS') {
-        rep.statusCode = 200
+    if ( req.routerMethod === 'OPTIONS') {
+        console.log(req.method)
+        rep.status(200)
         return done();
     }
     done()
