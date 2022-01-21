@@ -24,7 +24,7 @@ import { LAND_LIST } from "../../mockup-data/Lands";
 //https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
 const fastify = Fastify({ logger: false })
 fastify.register(cors, (instance) => (req, callback) => {
-    callback(null, { origin: false }) // callback expects two parameters: error and options
+    callback(null, { origin: false, optionsSuccessStatus: 200 }) // callback expects two parameters: error and options
 })
 
 fastify.register(websocket)
@@ -65,7 +65,7 @@ export const initFastify = async () => {
     try {
         const server = await fastify.listen({ port: PORT, host: "0.0.0.0" })
         successConsoleLog(`🚀 ${SERVER_NAME} fastify ready at ${server}`);
-        for (let land of LAND_LIST) { 
+        for (let land of LAND_LIST) {
             AddLand(land)
         }
     } catch (err: any) {
