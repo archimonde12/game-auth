@@ -61,6 +61,7 @@ fastify.addHook("preHandler", (req, rep, done) => {
     if ( req.routerMethod === 'OPTIONS') {
         console.log(req.method)
         rep.status(200)
+        rep.send()
         return done();
     }
     done()
