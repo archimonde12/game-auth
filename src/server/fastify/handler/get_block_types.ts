@@ -28,7 +28,7 @@ const BLOCK_TYPES: BlockType[] = [
         faceType: 2,
         icon: "https://drive.google.com/file/d/1NiYa4zrWkAVbv5BtpjTAz25VUiJbruhM/view",
         faces: [{
-            texture: "https://img.freepik.com/free-photo/white-concrete-wall_53876-92803.jpg?size=626&ext=jpg",
+            texture: "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/454c9a9174136b1.png",
             normals: "https://i.pinimg.com/564x/b3/d2/fd/b3d2fd54a8a44c665fd09bb6f4b7feb8--d-artist-broken-glass.jpg",
             alpha: 0.5
         }],
@@ -42,7 +42,7 @@ const BLOCK_TYPES: BlockType[] = [
         faceType: 2,
         icon: "https://drive.google.com/file/d/1MJxn8LeG7RYEyUbwHEUlbU4KEH4DzP6P/view?usp",
         faces: [{
-            texture: "https://media.istockphoto.com/photos/earth-texture-macro-photography-pattern-background-picture-id1277752567?k=20&m=1277752567&s=612x612&w=0&h=fHnOc6HznYZreHs5baH5e2448U-Eua6to66qoHf05Ds=",
+            texture: "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/0c798ef36649f8c.png",
             normals: "https://www.researchgate.net/profile/Andreas-Junker-3/publication/344587438/figure/fig4/AS:989314339074049@1612882327388/From-left-to-right-Wind-map-Texture-and-Normal-map-The-wind-map-is-a-texture-composed.ppm",
             alpha: 0.5
         }],
@@ -56,7 +56,7 @@ const BLOCK_TYPES: BlockType[] = [
         faceType: 2,
         icon: "https://drive.google.com/file/d/1jToc-zOgz4QKFqQeGpgghZsSYMTILB2t/view",
         faces: [{
-            texture: "https://previews.123rf.com/images/kelifamily/kelifamily2003/kelifamily200300136/142473392-gray-stone-wall-for-the-background-gray-stone-texture.jpg",
+            texture: "https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/d02578b45806cd9.png",
             normals: "https://thumbs.dreamstime.com/b/r-stone-wall-normal-map-computer-generated-texture-masonry-differently-sized-stones-insert-concrete-seamless-tileable-repeating-99018769.jpg",
             alpha: 0.5
         }],
