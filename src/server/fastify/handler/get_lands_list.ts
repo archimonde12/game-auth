@@ -24,7 +24,6 @@ export async function getLandList(req: FastifyRequest, rep: FastifyReply) {
         const token = getTokenFromReq(req)
         const tokenData = await verifyAuthJwt(token)
         await checkCachedToken(tokenData)
-        console.log(GetAllLands())
         rep.send({ result: GetAllLands() })
     } catch (e: any) {
         ErrorHandler(e, { body: req.body }, getLandList.name)

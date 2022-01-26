@@ -21,6 +21,8 @@ import { resetLand, ResetLandSchema } from "./handler/reset_land";
 import { removeObjects, RemoveObjectSchema } from "./handler/remove_objects";
 import { AddLand } from "../../local/Land";
 import { LAND_LIST } from "../../mockup-data/Lands";
+import { VerifyTokenSchema, verify_token } from "./handler/verify_token";
+import { SetLandSchema, set_land_number } from "./handler/set_land_number";
 //https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
 const fastify = Fastify({ logger: false })
 fastify.register(cors, (instance) => (req, callback) => {
@@ -39,6 +41,7 @@ fastify.post(methods.log_in, logInSchema, logIn)
 fastify.post(methods.create_sign_message, CreateSignMessageSchema, test_create_sign_message)
 fastify.get(methods.user_info, UserInfoSchema, userInfo)
 fastify.get(methods.refresh, RefreshSchema, refresh)
+fastify.get(methods.verify_token, VerifyTokenSchema, verify_token)
 fastify.get(methods.get_block_types, BlockTypesSchema, getBlockTypes)
 fastify.get(methods.get_land_list, LandListSchema, getLandList)
 fastify.get(methods.get_list_chunks, ChunkListSchema, getListChunks)
@@ -48,6 +51,7 @@ fastify.post(methods.send_list_object, SendObjectsSchema, sendListObjects)
 fastify.post(methods.submit_land, SubmitLandSchema, submitLand)
 fastify.post(methods.reset_land, ResetLandSchema, resetLand)
 fastify.post(methods.remove_objects, RemoveObjectSchema, removeObjects)
+fastify.post(methods.set_land_number, SetLandSchema, set_land_number)
 fastify.register(require("fastify-static"), {
     root: path.join(__dirname, "/../../../apidoc"),
     prefix: "/"
@@ -58,7 +62,7 @@ fastify.addHook("preHandler", (req, rep, done) => {
     rep.header("Access-Control-Allow-Credentials", "true")
     rep.header("Access-Control-Allow-Headers", "Accept, X-Access-Token, X-Application-Name, X-Request-Sent-Time")
     rep.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-    if ( req.routerMethod === 'OPTIONS') {
+    if (req.routerMethod === 'OPTIONS') {
         console.log(req.method)
         rep.status(200)
         rep.send()
