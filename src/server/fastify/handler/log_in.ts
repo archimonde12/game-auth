@@ -34,7 +34,7 @@ const CheckValidTimestamp = (timestamp: number, valid_range_in_sec: number) => {
 }
 
 export const sendRep = (rep: FastifyReply, value: any) => {
-   
+
     rep.send(value)
 }
 export async function logIn(req: FastifyRequest, rep: FastifyReply) {
@@ -44,6 +44,7 @@ export async function logIn(req: FastifyRequest, rep: FastifyReply) {
         if (!is_valid_timestamp) throw ErrMsg(ERROR_CODE.TIME_STAMP_INVALID)
         const address_from_sign_message = getAddressFromSignMessage(timestamp, sign_message)
         const is_match_address = address_from_sign_message === address
+        console.log({ address_from_sign_message, address })
         if (!is_match_address) throw ErrMsg(ERROR_CODE.SIGN_MESSAGE_INVALID)
         const found_user = await users.findOne({ address: address_from_sign_message })
         if (found_user) {
@@ -66,6 +67,6 @@ export async function logIn(req: FastifyRequest, rep: FastifyReply) {
         ErrorHandler(e, { body: req.body }, logIn.name)
         const errorCode = getHTTPErrorCode(e)
         rep.code(errorCode)
-        sendRep(rep,e)
+        sendRep(rep, e)
     }
 }
